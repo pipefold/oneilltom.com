@@ -1,9 +1,37 @@
+"use client"; // Required for R3F components
+
 import Image from "next/image";
+import { Canvas } from "@react-three/fiber";
+import { useRef } from "react";
+import { Mesh } from "three";
+
+function Box(props: JSX.IntrinsicElements["mesh"]) {
+  const meshRef = useRef<Mesh>(null!);
+  // You can add state and effects here to interact with the mesh
+  return (
+    <mesh {...props} ref={meshRef}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={"orange"} />
+    </mesh>
+  );
+}
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      {/* R3F Canvas */}
+      <div className="row-start-2 w-full h-64 border border-gray-300">
+        <Canvas>
+          <ambientLight intensity={Math.PI / 2} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
+          <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+          <Box position={[-1.2, 0, 0]} />
+          <Box position={[1.2, 0, 0]} />
+        </Canvas>
+      </div>
+
+      {/* Original Content - Optional: You might want to remove or adjust this */}
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start mt-[300px]"> {/* Added margin-top to push content below canvas */}
         <Image
           className="dark:invert"
           src="/next.svg"
