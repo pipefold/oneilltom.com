@@ -4,6 +4,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import * as THREE from "three";
 import { OrbitControls, useTexture, shaderMaterial } from "@react-three/drei";
+import { Leva } from "leva";
+import { CirclePackingShader } from "./circle-packing";
+import { CirclePacking3D } from "./circle-packing-3d";
+import { AccurateCirclePacking } from "./accurate-circle-packing";
+import { AccurateCirclePacking3D } from "./accurate-circle-packing-3d";
 
 // Basic vertex shader
 const vertexShader = `
@@ -232,10 +237,16 @@ export default function R3FShadersPage() {
     { name: "Gradient Shader", component: ShaderPlane },
     { name: "Wave Shader", component: WavePlane },
     { name: "Noise Shader", component: NoiseShaderSphere },
+    { name: "Circle Packing", component: CirclePackingShader },
+    { name: "Circle Packing 3D", component: CirclePacking3D },
+    { name: "Accurate Circle Packing", component: AccurateCirclePacking },
+    { name: "Accurate Circle Packing 3D", component: AccurateCirclePacking3D },
   ];
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Leva controls panel */}
+      <Leva collapsed={false} />
       <header className="p-4 bg-black text-white">
         <h1 className="text-2xl font-bold">R3F Shader Experiments</h1>
         <p className="text-sm opacity-70">

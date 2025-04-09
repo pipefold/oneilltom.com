@@ -1,11 +1,13 @@
 "use client"; // Required for R3F components
 
+import React from "react";
 import Image from "next/image";
-import { Canvas } from "@react-three/fiber";
+import Link from "next/link";
+import { Canvas, ThreeElements } from "@react-three/fiber";
 import { useRef } from "react";
 import { Mesh } from "three";
 
-function Box(props: JSX.IntrinsicElements["mesh"]) {
+function Box(props: ThreeElements["mesh"]) {
   const meshRef = useRef<Mesh>(null!);
   // You can add state and effects here to interact with the mesh
   return (
@@ -38,6 +40,15 @@ export default function Home() {
           <Box position={[-1.2, 0, 0]} />
           <Box position={[1.2, 0, 0]} />
         </Canvas>
+
+        <div className="mt-4 text-center">
+          <Link
+            href="/r3f-shaders"
+            className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Explore Shader Experiments
+          </Link>
+        </div>
       </div>
 
       {/* Original Content - Optional: You might want to remove or adjust this */}
