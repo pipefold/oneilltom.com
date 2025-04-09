@@ -41,12 +41,18 @@ export default function Home() {
           <Box position={[1.2, 0, 0]} />
         </Canvas>
 
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center flex flex-col gap-2">
           <Link
             href="/r3f-shaders"
             className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             Explore Shader Experiments
+          </Link>
+          <Link
+            href="/cracked-bubbling-spewing-lava"
+            className="inline-block px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+          >
+            Molten Lava Simulation
           </Link>
         </div>
       </div>
