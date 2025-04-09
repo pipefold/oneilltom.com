@@ -54,6 +54,18 @@ export default function Home() {
           >
             Molten Lava Simulation
           </Link>
+          <Link
+            href="/blowing-dust"
+            className="inline-block px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors"
+          >
+            Blowing Dust Simulation
+          </Link>
+          <Link
+            href="/dust-approaches"
+            className="inline-block px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+          >
+            Compare Dust Approaches
+          </Link>
         </div>
       </div>
 

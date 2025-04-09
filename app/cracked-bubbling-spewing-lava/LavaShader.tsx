@@ -352,24 +352,40 @@ export function LavaEffect() {
       return sqrt(res);
     }
     
-    // Lava crack pattern
-    float cracks(vec2 uv, float scale, float width, float time) {
-      // Create a grid of potential cracks
-      vec2 p = uv * scale;
+    // Organic lava crack pattern using noise
+    float organicCracks(vec2 uv, float scale, float width, float time) {
+      // Base noise for crack pattern
+      float noise1 = snoise(vec3(uv * scale * 0.5, time * 0.05)) * 0.5 + 0.5;
+      float noise2 = snoise(vec3(uv * scale * 0.2 + 100.0, time * 0.03)) * 0.5 + 0.5;
       
-      // Distort the grid over time for flowing effect
-      p.x += sin(p.y * 0.2 + time * 0.1) * 2.0;
-      p.y += cos(p.x * 0.2 + time * 0.05) * 2.0;
+      // Create flow direction based on noise
+      vec2 flowDir = vec2(
+        snoise(vec3(uv * 0.5, time * 0.1)),
+        snoise(vec3(uv * 0.5 + vec2(100.0, 200.0), time * 0.1))
+      );
       
-      // Create the crack pattern
-      float v1 = abs(fract(p.x) - 0.5);
-      float v2 = abs(fract(p.y) - 0.5);
+      // Distort UV based on flow direction
+      vec2 distortedUV = uv + flowDir * 0.1;
       
-      // Determine the width of cracks
-      float crack = smoothstep(width, 0.0, min(v1, v2));
+      // Create ridge pattern for cracks
+      float ridgeNoise1 = 1.0 - abs(snoise(vec3(distortedUV * scale, time * 0.02)) * 2.0);
+      float ridgeNoise2 = 1.0 - abs(snoise(vec3(distortedUV * scale * 0.5 + 300.0, time * 0.01)) * 2.0);
       
-      // Add some variation to the cracks
-      crack *= 0.5 + 0.5 * snoise(vec3(uv * 10.0, time * 0.1));
+      // Combine ridge patterns with different scales for varied crack widths
+      float combinedRidge = max(
+        pow(ridgeNoise1, 4.0) * 0.7,
+        pow(ridgeNoise2, 8.0) * 1.3
+      );
+      
+      // Apply noise modulation to create breaks and variations in the cracks
+      float modulation = mix(0.4, 1.0, noise1 * noise2);
+      
+      // Create the final crack pattern
+      float crack = smoothstep(width * modulation, 0.0, combinedRidge * 0.3);
+      
+      // Add some small-scale detail to the cracks
+      float detail = snoise(vec3(uv * scale * 2.0, time * 0.1)) * 0.5 + 0.5;
+      crack = mix(crack, crack * detail, 0.3);
       
       return crack;
     }
@@ -415,19 +431,28 @@ export function LavaEffect() {
       // Add glow to hotter areas with enhanced intensity
       finalColor += uHotColor * heat * uLavaGlow * (1.0 - isCrust);
       
-      // Add cracks in the crust
+      // Add organic cracks in the crust
       if (isCrust > 0.3) {
-        // Create thin cracks where the lava shows through
-        float crack = cracks(flowUv, uCrackFrequency, uCrackWidth, uTime);
+        // Create organic cracks where the lava shows through
+        float crack = organicCracks(flowUv, uCrackFrequency, uCrackWidth, uTime);
         
         // Make cracks more prominent in higher crust areas
         crack *= smoothstep(0.3, 0.7, isCrust);
+        
+        // Add some variation to crack intensity based on position
+        float crackVariation = snoise(vec3(flowUv * 2.0, uTime * 0.05)) * 0.5 + 0.5;
+        crack *= 0.7 + 0.6 * crackVariation;
         
         // Mix in hot lava color for the cracks
         finalColor = mix(finalColor, uHotColor, crack * 0.8);
         
         // Add glow to the cracks
         finalColor += uHotColor * crack * uLavaGlow * 0.5;
+        
+        // Add some extra detail to the edges of the cracks
+        float crackEdge = organicCracks(flowUv, uCrackFrequency * 1.1, uCrackWidth * 1.5, uTime) - crack;
+        crackEdge = max(0.0, crackEdge);
+        finalColor = mix(finalColor, mix(uHotColor, uCrustColor, 0.5), crackEdge * 0.5);
       }
       
       // Add specular highlights to simulate wet lava
