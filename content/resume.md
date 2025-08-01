@@ -1,87 +1,75 @@
-# Thomas O'Neill Resume
+# Tom O'Neill
 
-**Software & Systems Engineer**  
-[LinkedIn](https://linkedin.com/in/oneilltomcity) | [GitHub](https://github.com/pipefold) | [Portfolio](https://oneilltom.com) | tom@pipefold.io | Remote/London
-
----
+**Software Engineer**  
+Aylesbury, UK (London area) | +44 7510345710 | tom@oneilltom.com  
+LinkedIn: linkedin.com/in/oneilltomcity | GitHub: github.com/pipefold | Website: oneilltom.com
 
 ## Professional Summary
 
-Versatile software engineer with 5+ years of experience, specializing in 3D web development with Three.js and prior DevOps automation for scalable back-end systems. Passionate about building innovative solutions in Bitcoin (blockchain analytics, TradFi integrations), AI, and human-centered tech through relational practices like circling. Thrives in startup environments, delivering creative visualizations and fostering collaborative team dynamics.
-
----
+Experienced software engineer with expertise in web development, specializing in 3D web technologies using Three.js and the React ecosystem (including Next.js and TypeScript). Proven track record leading projects from prototype to production, with a strong foundation in backend systems, DevOps, and functional programming. Self-taught polyglot programmer comfortable in languages like Python and Rust, passionate about p2p technologies, cryptography, Bitcoin, and innovative systems. Open to technical management roles, leveraging leadership in creative problem-solving and relational practices.
 
 ## Skills
 
-| **Technical**                  | **Domain Expertise**                        | **Soft Skills**                            |
-| ------------------------------ | ------------------------------------------- | ------------------------------------------ |
-| JavaScript (Three.js, Node.js) | Bitcoin/Blockchain (APIs, Mining Analytics) | Authentic Relating & Circling Facilitation |
-| Python (AI, Analytics)         | AI/ML Basics (TensorFlow)                   | Cross-Functional Collaboration             |
-| DevOps (Docker, CI/CD)         | Data Visualization (D3.js, WebGL)           | Agile/Lean Methodologies                   |
-| WebGL, Audio Processing        | Crypto TradFi (Exchanges, Stocks)           | Stakeholder Communication                  |
+- **Frontend/Web Development:** JavaScript, TypeScript, React, Next.js, Three.js (3D web development), Mapbox GL, Functional Programming (fp-ts, monads, applicatives, map/filter/reduce pipelines)
+- **Backend/DevOps:** Python, Golang, Rust, Shell Scripting, Perl, Java, Docker, Kubernetes, Ansible, Serverless, Airtable
+- **Systems/Other:** Linux Sysadmin (expert-level), Cryptography, DSP Programming, P2P Technologies, Bitcoin
+- **Soft Skills:** Leadership (project lead experience), Creative Problem-Solving, Adaptability (freelance/entrepreneurial), Authentic Relating (Certified Leader in Transformational Connection, formerly Circling Europe; ART Levels 1 & 2)
 
----
+## Work Experience
 
-## Professional Experience
+### Lead 3D Web Engineer
 
-### Lead 3D Web Developer, Open Systems Lab
+Open Systems Lab, Remote/UK  
+November 2021 – March 2025
 
-_2021–2025 | Remote, London_
+- Served as sole developer for BuildX, a prototype web application enabling users to design DfMA housing systems (e.g., WikiHouse integration) using Three.js and Next.js; implemented features for analytics, bill of materials, order lists, and 3D model outputs.
+- Led development of Atlas of Ownership (atlasofownership.org), a Mapbox GL and Next.js-based platform for browsing and searching land ownership patterns on a 3D globe; ensured interactive search and visualization capabilities.
+- Transitioned from full-time to freelance/contract basis while maintaining full-time client engagement, focusing on functional programming paradigms and TypeScript for robust, scalable code.
 
-- Built interactive 3D visualizations with Three.js for a crypto analytics platform, reducing load times by 40%.  
-  ![3D Visualization Demo](https://github.com/janedoe/resume/raw/main/assets/crypto-viz.gif)
-- Developed a Bitcoin transaction visualizer, integrating exchange APIs for real-time data insights.
-- Facilitated team workshops using circling techniques, improving sprint alignment by 20%.
+### Freelance Web Developer & Entrepreneur
 
-### DevOps Engineer, Corporate Company
+Various (Self-Employed / Pipe Fold Ltd), UK & Berlin  
+January 2017 – November 2021
 
-_2018–2022 | New York, NY_
+- Co-founded a web development partnership (2020–2021), delivering a full eCommerce and Point-of-Sale solution for Bear Bookshop using Shopify, Next.js, and iZettle integration; handled backend setup and frontend design for a local Birmingham bookstore.
+- Participated in Social Digital Innovation incubator in Berlin (June–December 2017) to conceptualize "Free the Data," a social impact startup bridging proprietary platform data (e.g., Spotify, Google) into p2p systems for user analytics and algorithmic matching.
+- Managed freelance projects under Pipe Fold Ltd, applying web and systems expertise to experimental tech ventures.
 
-- Automated infrastructure with CI/CD pipelines using Docker, cutting deployment time by 30%.
-- Managed AWS-based back-end systems, ensuring 99.9% uptime for enterprise applications.
-- Mentored junior engineers, leveraging authentic relating to foster team growth.
+### Automation Developer
 
----
+Claranet, UK  
+November 2015 – April 2017
+
+- Developed automation for core network and server configuration management using open-source DevOps tools (e.g., Docker, Kubernetes, Ansible).
+- Programmed in Python, Golang, and shell scripting; contributed to proof-of-concept deployment of OpenStack.
+- Submitted contributions to OpenStack Kolla project (e.g., Neutron BGP Dynamic Routing Agent blueprint).
+- Built in-house configuration management tools, including UI and REST API in Java, and automation scripts in Perl.
+
+### Service Desk Analyst
+
+SCC, UK  
+May 2014 – October 2015
+
+- Provided 24/7 user-facing technical support in a NOC for SCC’s secure multi-tenant government cloud platform (Sentinel).
+- Maintained NSV SC clearance; independently completed CCNA certification to enhance networking fundamentals (e.g., subnetting, IP configuration, DHCP protocols).
 
 ## Projects
 
-### Crypto Visualization Tool
+- **BuildX Prototype** (Open Systems Lab): Developed a functional 3D web tool for DfMA housing design; technologies: Three.js, Next.js, React, TypeScript. (Forked repo visible on GitHub: github.com/pipefold/buildx-app)
+- **Atlas of Ownership** (Open Systems Lab): Interactive 3D globe for land ownership exploration; technologies: Mapbox GL, Next.js, React. (Site: atlasofownership.org – appears minimally active with basic title and about page as of August 2025)
+- **Bear Bookshop eCommerce/PoS**: Custom Shopify integration with Next.js and iZettle for a physical bookstore; focused on seamless online-to-in-store synchronization.
+- **Free the Data Concept**: Ideated p2p data bridging software during Berlin incubator; explored analytics and matching algorithms for user-owned data.
+- **Personal Experiments**: Hobby projects in Rust (e.g., Bevy game engine), TypeScript (e.g., QR-time tool, Fedimint observer frontend), and DSP programming; visible on GitHub (github.com/pipefold) with recent activity in web and systems tech.
 
-_2024 | [GitHub](https://github.com/janedoe/crypto-viz)_
+## Certifications & Professional Development
 
-- Built a Three.js dashboard to visualize Bitcoin mining metrics and TradFi stock correlations.
-- Used Python for data analysis, integrating public blockchain APIs.  
-  ![Dashboard Demo](https://github.com/janedoe/resume/raw/main/assets/dashboard-demo.gif)
+- Certified Leader, Transformational Connection (formerly Circling Europe), 2025
+- Authentic Relating Training (ART) Levels 1 & 2, Recent
+- CCNA Routing & Switching, Independently Completed (2015; fundamentals in networking protocols remain relevant)
+- Self-Taught Software Engineer: Extensive auto-didactic learning in web development, systems programming, and emerging tech (e.g., Bitcoin, p2p systems).
 
-### Circling Web App
+## Additional Information
 
-_2023 | [Demo](https://janedoe.dev/circling)_
-
-- Developed a platform for authentic relating exercises, with audio feedback for remote teams.
-- Integrated Web Audio API for real-time voice processing.  
-  <video src="https://github.com/janedoe/resume/raw/main/assets/circling-demo.mp4" width="400" controls></video>
-
-### AI Market Predictor
-
-_2023 | [GitHub](https://github.com/janedoe/ai-crypto)_
-
-- Experimented with TensorFlow to predict Bitcoin market trends using historical data.
-- Deployed model on AWS, achieving 70% accuracy in test scenarios.
-
----
-
-## Education
-
-**B.S. in Computer Science**, University of Example  
-_2014–2018 | City, State_
-
-- Relevant Coursework: Algorithms, Data Structures, Machine Learning Basics
-
----
-
-## Additional
-
-- **Certifications:** AWS Certified DevOps Engineer, Blockchain Council Certified Bitcoin Expert
-- **Interests:** Bitcoin ecosystem research, AI experimentation, facilitating circling for team building
-- **Portfolio:** [janedoe.dev](https://janedoe.dev) – Explore 3D and crypto projects
-- **Talks:** Presented “Visualizing Blockchain with Three.js” at Crypto Meetup, 2024
+- **Interests:** Bitcoin and cryptocurrency ecosystems, p2p technologies, creative coding (e.g., DSP), relational practices (Circling/Authentic Relating).
+- **Languages:** English (Native).
+- References available upon request.
