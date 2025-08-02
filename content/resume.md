@@ -22,9 +22,10 @@ Experienced software engineer with expertise in web development, specializing in
 Open Systems Lab, Remote/UK  
 November 2021 – March 2025
 
-- Served as sole developer for BuildX, a prototype web application enabling users to design DfMA housing systems (e.g., WikiHouse integration) using Three.js and Next.js; implemented features for analytics, bill of materials, order lists, and 3D model outputs.
-- Led development of Atlas of Ownership (atlasofownership.org), a Mapbox GL and Next.js-based platform for browsing and searching land ownership patterns on a 3D globe; ensured interactive search and visualization capabilities.
-- Transitioned from full-time to freelance/contract basis while maintaining full-time client engagement, focusing on functional programming paradigms and TypeScript for robust, scalable code.
+- Led development of BuildX prototype, a 3D web app for DfMA housing design (e.g., WikiHouse integration); implemented real-time parametric modeling, interactive 3D manipulations with OBB collision detection and CSG operations (three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), and analytics for embodied carbon, cost estimations, bill of materials, and order lists with CSV/3D exports (GLTF/OBJ).
+- Engineered robust, scalable solutions using functional programming patterns (fp-ts for complex data transformations and error handling with TaskEither), reactive state management (Valtio), and type safety (TypeScript, Zod); optimized performance with Web Workers for heavy computations (e.g., model exports, PNG snapshots), local caching (Dexie for IndexedDB), Airtable API for build system data (including model URLs), and Speckle for BIM/IFC parsing to ensure responsive UI.
+- Led frontend redevelopment of Atlas of Ownership (atlasofownership.org) from a prior setup, building a Mapbox GL and Next.js platform for browsing/searching land ownership on a 3D globe; synchronized routing, SSR, navigation, and interactive visualizations for seamless UX.
+- Collaborated with CEO and architects to integrate sustainability metrics (e.g., net carbon impact calculations) and manufacturing outputs, enhancing WikiHouse tools for real-world DfMA applications.
 
 ### Freelance Web Developer & Entrepreneur
 
