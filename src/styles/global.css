@@ -39,6 +39,23 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Font families */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-mono: var(--font-inconsolata), ui-monospace, Menlo, monospace;
+}
+
+/* Debug: Check if font variables are being set */
+.debug-fonts {
+  font-family: var(--font-montserrat), fallback;
+}
+.debug-fonts::before {
+  content: "Montserrat var: " var(--font-montserrat, "NOT SET");
+  display: block;
+  font-family: monospace;
+  font-size: 12px;
+  color: red;
 }
 
 :root {
