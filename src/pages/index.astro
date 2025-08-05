@@ -1,7 +1,6 @@
 ---
 import MainLayout from "../layouts/main.astro";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ModeToggle";
 ---
 
 <MainLayout content={{ title: "Astro + TailwindCSS" }}>
@@ -21,6 +20,5 @@ import { ModeToggle } from "@/components/ModeToggle";
     <a href="/markdown-page" class="p-4 underline"
       >Markdown is also supported...</a
     >
-    <ModeToggle client:only />
   </div>
 </MainLayout>

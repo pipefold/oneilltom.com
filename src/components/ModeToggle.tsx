@@ -4,53 +4,85 @@ import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function ModeToggle() {
-  const [theme, setThemeState] = React.useState<"light" | "dark" | "system">(
+  // Internal state: "system" means use system preference, "light"/"dark" means manual choice
+  const [theme, setThemeState] = React.useState<"system" | "light" | "dark">(
     "system"
   );
 
   React.useEffect(() => {
-    // Check if user has previously made a choice
+    // Check if user has previously made a manual choice
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setThemeState(savedTheme as "light" | "dark" | "system");
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setThemeState(savedTheme);
     } else {
-      // Default to system if no previous choice
+      // No saved preference - use system preference
       setThemeState("system");
     }
   }, []);
 
+  // Listen for system preference changes when in system mode
   React.useEffect(() => {
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    if (theme !== "system") return;
 
-    // Save the theme choice to localStorage
-    localStorage.setItem("theme", theme);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      // Force re-render to update the effective theme
+      setThemeState("system");
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, [theme]);
 
-  const cycleTheme = () => {
+  React.useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("light", "dark");
+
+    // Determine effective theme
+    let effectiveTheme: "light" | "dark";
     if (theme === "system") {
-      // If currently on system, switch to light
-      setThemeState("light");
-    } else if (theme === "light") {
-      // If currently on light, switch to dark
-      setThemeState("dark");
+      // Use system preference
+      effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
     } else {
-      // If currently on dark, switch to light
-      setThemeState("light");
+      // Use manual choice
+      effectiveTheme = theme;
+    }
+
+    root.classList.add(effectiveTheme);
+
+    // Only store manual choices, not system preference
+    if (theme !== "system") {
+      localStorage.setItem("theme", theme);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    // If currently on system, switch to the opposite of current system preference
+    if (theme === "system") {
+      const isSystemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setThemeState(isSystemDark ? "light" : "dark");
+    } else {
+      // Toggle between light and dark
+      setThemeState(theme === "light" ? "dark" : "light");
     }
   };
 
   const getIcon = () => {
-    // Always show sun/moon based on current effective theme
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // Show icon based on effective theme (system preference until manual choice)
+    let effectiveTheme: "light" | "dark";
+    if (theme === "system") {
+      effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    } else {
+      effectiveTheme = theme;
+    }
 
-    return isDark ? (
+    return effectiveTheme === "dark" ? (
       <Moon className="h-[1.2rem] w-[1.2rem]" />
     ) : (
       <Sun className="h-[1.2rem] w-[1.2rem]" />
@@ -58,7 +90,7 @@ export function ModeToggle() {
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={cycleTheme}>
+    <Button variant="outline" size="icon" onClick={toggleTheme}>
       {getIcon()}
       <span className="sr-only">Toggle theme</span>
     </Button>
