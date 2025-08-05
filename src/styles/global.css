@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import 'shadcn-prose';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -42,7 +43,7 @@
   
   /* Font families */
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-serif: var(--font-eb-garamond), ui-serif, Georgia, serif;
   --font-mono: var(--font-inconsolata), ui-monospace, Menlo, monospace;
 }
 

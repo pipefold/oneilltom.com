@@ -25,11 +25,11 @@ export default defineConfig({
         styles: ["normal"], // Add 'italic' if needed
         fallbacks: ["ui-sans-serif", "system-ui"], // Optimized fallbacks
       },
-      // Serif: Cormorant Garamond
+      // Serif: EB Garamond
       {
         provider: fontProviders.google(),
-        name: "Cormorant Garamond",
-        cssVariable: "--font-cormorant",
+        name: "EB Garamond",
+        cssVariable: "--font-eb-garamond",
         subsets: ["latin"],
         weights: [400, 700],
         styles: ["normal", "italic"],
