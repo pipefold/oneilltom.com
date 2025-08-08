@@ -21,7 +21,7 @@ export default defineConfig({
         name: "Montserrat",
         cssVariable: "--font-montserrat",
         subsets: ["latin"], // Optimize by subsetting to needed characters
-        weights: [400, 700], // Only include used weights
+        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900], // Only include used weights
         styles: ["normal"], // Add 'italic' if needed
         fallbacks: ["ui-sans-serif", "system-ui"], // Optimized fallbacks
       },
