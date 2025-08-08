@@ -12,106 +12,232 @@
 <script>
   import * as THREE from "three";
   import { oklchToRGB, getThemeColors } from "../lib/colors.js";
+  import { euclidean } from "../lib/euclidean.ts";
 
-  // Initialize Three.js scene
   function initThreeBackground() {
     const container = document.getElementById("three-background");
     if (!container) return;
 
-    // Scene setup
     const scene = new THREE.Scene();
-
-    // Create a simple plane geometry
     const geometry = new THREE.PlaneGeometry(2, 2);
 
-    // Create material with solid color
-    const colors = getThemeColors();
-    const backgroundColor = oklchToRGB(colors.background);
-    console.log("Background color:", colors.background, "→", backgroundColor);
+    const css = getThemeColors();
+    const bg = oklchToRGB(css.background);
+    const cPrimary = oklchToRGB(css.primary);
+    const cSecondary = oklchToRGB(css.secondary);
+    const cAccent = oklchToRGB(css.accent);
+    const cRing = oklchToRGB(css.ring);
 
-    const material = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(
-        backgroundColor.r,
-        backgroundColor.g,
-        backgroundColor.b
-      ),
-      side: THREE.DoubleSide,
+    const MAX = 4;
+
+    const uniforms = {
+      time: { value: 0.0 },
+      baseColor: { value: new THREE.Color(bg.r, bg.g, bg.b) },
+
+      pulseStartTimes: { value: new Array(MAX).fill(-10.0) },
+      centers: {
+        value: [
+          new THREE.Vector2(0.25, 0.35),
+          new THREE.Vector2(0.75, 0.3),
+          new THREE.Vector2(0.3, 0.7),
+          new THREE.Vector2(0.7, 0.75),
+        ],
+      },
+      waveSpeeds: { value: [2.0, 1.6, 2.4, 1.2] },
+      waveDurations: { value: [1.0, 1.25, 0.9, 1.5] },
+      pulseColors: {
+        value: [
+          new THREE.Color(cPrimary.r, cPrimary.g, cPrimary.b),
+          new THREE.Color(cSecondary.r, cSecondary.g, cSecondary.b),
+          new THREE.Color(cAccent.r, cAccent.g, cAccent.b),
+          new THREE.Color(cRing.r, cRing.g, cRing.b),
+        ],
+      },
+      grainAmount: { value: 0.025 },
+      vignetteStrength: { value: 0.25 },
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        precision highp float;
+        varying vec2 vUv;
+
+        const int MAX = 4;
+
+        uniform float time;
+        uniform vec3  baseColor;
+        uniform float pulseStartTimes[MAX];
+        uniform vec2  centers[MAX];
+        uniform float waveSpeeds[MAX];
+        uniform float waveDurations[MAX];
+        uniform vec3  pulseColors[MAX];
+
+        uniform float grainAmount;
+        uniform float vignetteStrength;
+
+        float hash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1,311.7)), dot(p, vec2(269.5,183.3)));
+          return fract(sin(p.x+p.y) * 43758.5453123);
+        }
+
+        void main() {
+          vec3 color = baseColor;
+          float luma = dot(baseColor, vec3(0.2126, 0.7152, 0.0722));
+
+          // Layer multiple channels
+          for (int i = 0; i < MAX; i++) {
+            float age = time - pulseStartTimes[i];
+            if (age > 0.0 && age < waveDurations[i]) {
+              float dist = distance(vUv, centers[i]);
+              float wavePos = age * waveSpeeds[i];
+              float intensity = smoothstep(0.0, 1.0, 1.0 - age / waveDurations[i]);
+              float wave = sin((dist - wavePos) * 20.0) * 0.5 + 0.5;
+              wave *= smoothstep(0.05, 0.0, abs(dist - wavePos));
+              vec3 added = color + pulseColors[i] * wave * intensity;
+              vec3 mixed = mix(color, pulseColors[i], wave * intensity);
+              color = (luma > 0.6) ? mixed : added;
+              color = clamp(color, 0.0, 1.0);
+            }
+          }
+
+          // Vignette
+          float d = distance(vUv, vec2(0.5));
+          float vignette = smoothstep(0.9, 0.2, d);
+          color *= mix(1.0, vignette, vignetteStrength);
+
+          // Grain
+          float g = hash(vUv * (time * 60.0)) * 2.0 - 1.0;
+          color += g * grainAmount;
+
+          gl_FragColor = vec4(clamp(color, 0.0, 1.0), 1.0);
+        }
+      `,
     });
 
-    // Create mesh
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // Setup renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-    });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-
-    // Add to DOM
     container.appendChild(renderer.domElement);
 
-    // Setup camera
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 1000);
-    camera.position.z = 1;
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.0, 1.0);
 
-    // Animation loop
+    // Channels: k/n, step division, optional rotation offset
+    const channels = [
+      { k: 3, n: 8, div: 4, offset: 0 },
+      { k: 5, n: 12, div: 3, offset: 1 },
+      { k: 2, n: 5, div: 6, offset: 0 },
+      { k: 7, n: 16, div: 2, offset: 3 },
+    ].slice(0, MAX);
+
+    const bpm = 120;
+    const baseStepMs = 60000 / bpm; // quarter note
+    const sequences = channels.map((c) => euclidean(c.k, c.n));
+    const steps = new Array(channels.length).fill(0);
+    const lastTimes = new Array(channels.length).fill(performance.now());
+
+    const startTime = performance.now();
+
+    function tick(nowSec) {
+      // time uniform
+      uniforms.time.value = nowSec - startTime / 1000.0; // just ensure non-zero drift
+    }
+
     function animate() {
       requestAnimationFrame(animate);
+      const now = performance.now();
+      tick(now / 1000);
+
+      // Per-channel clocks (different divisions)
+      for (let i = 0; i < channels.length; i++) {
+        const stepMs = baseStepMs / channels[i].div;
+        if (now - lastTimes[i] > stepMs) {
+          const seq = sequences[i];
+          const idx = (steps[i] + channels[i].offset) % seq.length;
+          if (seq[idx] === 1) {
+            uniforms.pulseStartTimes.value[i] = (now - startTime) / 1000.0;
+          }
+          steps[i] = (steps[i] + 1) % seq.length;
+          lastTimes[i] = now;
+        }
+      }
+
       renderer.render(scene, camera);
     }
     animate();
 
-    // Handle resize
     function handleResize() {
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
     window.addEventListener("resize", handleResize);
 
-    // Handle theme changes
+    // Click to trigger at cursor UV (works even though pointer-events are none)
+    function handleClick(e) {
+      const u = e.clientX / window.innerWidth;
+      const v = 1.0 - e.clientY / window.innerHeight;
+      // Cycle channel to trigger
+      const i = Math.floor(Math.random() * channels.length) | 0;
+      uniforms.centers.value[i].set(u, v);
+      uniforms.pulseStartTimes.value[i] =
+        (performance.now() - startTime) / 1000.0;
+    }
+    window.addEventListener("pointerdown", handleClick);
+
+    // Theme reactivity
     function handleThemeChange() {
-      const colors = getThemeColors();
-      const backgroundColor = oklchToRGB(colors.background);
-      material.color.setRGB(
-        backgroundColor.r,
-        backgroundColor.g,
-        backgroundColor.b
-      );
+      const c = getThemeColors();
+      const bgRGB = oklchToRGB(c.background);
+      const prim = oklchToRGB(c.primary);
+      const sec = oklchToRGB(c.secondary);
+      const acc = oklchToRGB(c.accent);
+      const ring = oklchToRGB(c.ring);
+
+      uniforms.baseColor.value.setRGB(bgRGB.r, bgRGB.g, bgRGB.b);
+      const palette = [
+        new THREE.Color(prim.r, prim.g, prim.b),
+        new THREE.Color(sec.r, sec.g, sec.b),
+        new THREE.Color(acc.r, acc.g, acc.b),
+        new THREE.Color(ring.r, ring.g, ring.b),
+      ];
+      for (let i = 0; i < MAX; i++) {
+        uniforms.pulseColors.value[i] = palette[i % palette.length];
+      }
     }
 
-    // Listen for theme changes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          handleThemeChange();
-        }
-      });
+    const observer = new MutationObserver((muts) => {
+      for (const m of muts)
+        if (m.attributeName === "class") handleThemeChange();
     });
-
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
 
-    // Initial theme check
     handleThemeChange();
 
-    // Return cleanup function
+    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointerdown", handleClick);
       observer.disconnect();
-      if (container && renderer.domElement) {
+      if (container && renderer.domElement)
         container.removeChild(renderer.domElement);
-      }
       renderer.dispose();
       geometry.dispose();
       material.dispose();
     };
   }
 
-  // Initialize when DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initThreeBackground);
   } else {
