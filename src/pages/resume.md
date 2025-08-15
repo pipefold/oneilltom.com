@@ -25,9 +25,11 @@ Software engineer specializing in web development, with expertise in 3D technolo
 Open Systems Lab, Remote/UK
 November 2021 – March 2025
 
-- Led development of BuildX prototype, a 3D web app for modular housing design (e.g., WikiHouse integration); implemented real-time parametric modeling, interactive 3D manipulations with oriented bounding box collision detection and constructive solid geometry operations (three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), analytics for embodied carbon and cost estimations, and build outputs including bill of materials, order lists, and CSV/3D exports.
-- Engineered robust, scalable solutions using functional programming patterns (fp-ts for complex data transformations and error handling with TaskEither), reactive state management (Valtio), and type safety (TypeScript, Zod); optimized performance with Web Workers for heavy computations (e.g., model exports, PNG snapshots), local caching (Dexie for IndexedDB), Airtable API for build system data (including model URLs), and Speckle for 3D model parsing to ensure a performant UI.
-- Directed frontend redevelopment of Atlas of Ownership (atlasofownership.org) from a prior setup; built a Mapbox GL and Next.js platform for browsing/searching land ownership on a 3D globe; synchronized routing, SSR, navigation, and interactive visualizations for seamless UX.
+- Led development of [BuildX](https://github.com/pipefold/buildx-app/blob/main/README.md) :github: prototype, a 3D web app for modular housing design (e.g., WikiHouse integration); implemented real-time parametric modeling, interactive 3D manipulations with oriented bounding box collision detection and constructive solid geometry operations (three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), analytics for embodied carbon and cost estimations, and build outputs including bill of materials, order lists, and CSV/3D exports.
+
+<!-- - Engineered robust, scalable solutions using functional programming patterns (fp-ts for complex data transformations and error handling with TaskEither), reactive state management (Valtio), and type safety (TypeScript, Zod); optimized performance with Web Workers for heavy computations (e.g., model exports, PNG snapshots), local caching (Dexie for IndexedDB), Airtable API for build system data (including model URLs), and Speckle for 3D model parsing to ensure a performant UI. -->
+
+- Directed frontend redevelopment of [Atlas of Ownership](https://atlasofownership.org) :globe_with_meridians: from a prior setup; built a Mapbox GL and Next.js platform for browsing/searching land ownership on a 3D globe; synchronized routing, SSR, navigation, and interactive visualizations for seamless UX.
 
 ### Co-Founder & Lead Developer
 

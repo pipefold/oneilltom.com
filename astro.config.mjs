@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import react from "@astrojs/react";
 import remarkEmoji from "remark-emoji";
+import { remarkGithubEmoji } from "./src/lib/remark-github-emoji.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,7 +20,7 @@ export default defineConfig({
         "astro:config:setup": ({ updateConfig }) => {
           updateConfig({
             markdown: {
-              remarkPlugins: [remarkEmoji],
+              remarkPlugins: [remarkEmoji, remarkGithubEmoji],
             },
           });
         },
