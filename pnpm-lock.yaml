@@ -59,9 +59,6 @@ importers:
       remark-emoji:
         specifier: ^5.0.1
         version: 5.0.1
-      shadcn-prose:
-        specifier: ^1.1.0
-        version: 1.1.0
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -2097,9 +2094,6 @@ packages:
     resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
-
-  shadcn-prose@1.1.0:
-    resolution: {integrity: sha512-a6A3BDWDsXAIzG0XwZrLE/oj029FXLIuQuqZFsee71ibvpppDCQs5svGNvFrILr7pRb37tlX+3oTrogvO9vaSA==}
 
   sharp@0.33.5:
     resolution: {integrity: sha512-haPVm1EkS9pgvHrQ/F3Xy+hgcuMV0Wm9vfIBSiwZ05k+xgb0PkBQpGsAA/oWdDobNaZTH5ppvHtzCFbnSEwHVw==}
@@ -4928,8 +4922,6 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.7.2: {}
-
-  shadcn-prose@1.1.0: {}
 
   sharp@0.33.5:
     dependencies:
