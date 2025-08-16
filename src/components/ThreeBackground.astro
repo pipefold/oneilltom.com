@@ -29,12 +29,12 @@
     const backgroundColor = oklchToRGB(colors.background);
     console.log("Background color:", colors.background, "→", backgroundColor);
 
+    const colorLinear = new THREE.Color()
+      .setRGB(backgroundColor.r, backgroundColor.g, backgroundColor.b)
+      .convertSRGBToLinear();
+
     const material = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(
-        backgroundColor.r,
-        backgroundColor.g,
-        backgroundColor.b
-      ),
+      color: colorLinear,
       side: THREE.DoubleSide,
     });
 
@@ -47,6 +47,7 @@
       antialias: true,
       alpha: true,
     });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -70,15 +71,13 @@
     }
     window.addEventListener("resize", handleResize);
 
-    // Handle theme changes
     function handleThemeChange() {
       const colors = getThemeColors();
       const backgroundColor = oklchToRGB(colors.background);
-      material.color.setRGB(
-        backgroundColor.r,
-        backgroundColor.g,
-        backgroundColor.b
-      );
+      const colorLinear = new THREE.Color()
+        .setRGB(backgroundColor.r, backgroundColor.g, backgroundColor.b)
+        .convertSRGBToLinear();
+      material.color.copy(colorLinear);
     }
 
     // Listen for theme changes
