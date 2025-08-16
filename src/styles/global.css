@@ -208,29 +208,15 @@
   }
 }
 
-/* .prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  @apply !font-normal;
-}
-
-
-.prose h3 {
-  text-decoration: underline;
-} */
-
-.prose {
+.resume-prose {
   @apply max-w-[65ch] text-foreground text-xs;
 
   & h1:not(.not-prose h1) {
-    @apply scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-5xl;
+    @apply scroll-m-20 text-4xl font-normal tracking-tight;
   }
 
   & h2:not(.not-prose h2) {
-    @apply scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight mt-12 first:mt-0;
+    @apply scroll-m-20 border-b pb-2 text-2xl font-normal tracking-tight mt-12 first:mt-0;
   }
 
   & h3:not(.not-prose h3) {

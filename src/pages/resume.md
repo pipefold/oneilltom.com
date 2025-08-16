@@ -3,6 +3,8 @@ title: "Tom O'Neill"
 layout: ../layouts/resume.astro
 ---
 
+# Tom O'Neill
+
 <!-- **Software Engineer**
 London, UK | tom@oneilltom.com
 GitHub: github.com/pipefold | Website: oneilltom.com -->
