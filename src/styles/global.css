@@ -213,11 +213,11 @@
   }
 
   & h2:not(.not-prose h2) {
-    @apply scroll-m-20 border-b pb-2 text-4xl font-normal tracking-[0.015em] mt-12 first:mt-0;
+    @apply scroll-m-20 border-b pb-2 text-4xl font-normal tracking-[0.015em] mt-8 first:mt-0;
   }
 
   & h3:not(.not-prose h3) {
-    @apply scroll-m-20 text-2xl font-medium mt-12 tracking-normal first:mt-0;
+    @apply scroll-m-20 text-2xl font-medium mt-6 tracking-normal first:mt-0;
   }
 
   & h4:not(.not-prose h4) {
@@ -244,7 +244,7 @@
   }
 
   & p:not(.not-prose p) {
-    @apply leading-[175%] [&:not(:first-child)]:mt-6;
+    @apply leading-[175%] [&:not(:first-child)]:mt-3;
   }
 
   & li:not(.not-prose li) {
@@ -280,7 +280,7 @@
   }
 
   & ul:not(.not-prose ul) {
-    @apply my-6 ml-6 list-disc [&>li]:mt-2;
+    @apply my-3 ml-6 list-disc [&>li]:mt-1;
 
     & p {
       @apply my-0 inline;
@@ -288,7 +288,7 @@
   }
 
   & ol:not(.not-prose ol) {
-    @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+    @apply my-3 ml-6 list-decimal [&>li]:mt-1;
 
     & p {
       @apply my-0 inline;
