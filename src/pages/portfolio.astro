@@ -1,0 +1,83 @@
+---
+import MainLayout from "../layouts/main.astro";
+
+// Portfolio pieces - you can manage this manually or generate from MDX files
+const portfolioPieces = [
+  {
+    slug: "buildx",
+    title: "BuildX",
+    description: "A powerful build system for modern development workflows",
+    coverImage: "/images/portfolio/buildx-cover.jpg", // Static image in public/
+    tags: ["Build System", "Development", "CLI"],
+    date: "2024-01-15"
+  },
+  {
+    slug: "voxel-viewer",
+    title: "3D Voxel Viewer",
+    description: "Interactive 3D visualization tool for voxel data using Three.js",
+    coverImage: "/images/portfolio/voxel-viewer-cover.jpg",
+    tags: ["Three.js", "3D Graphics", "WebGL"],
+    date: "2024-01-10"
+  },
+  {
+    slug: "pulse-generator",
+    title: "Multi-Channel Pulse Generator",
+    description: "Real-time audio pulse generation with visual effects",
+    coverImage: "/images/portfolio/pulse-generator-cover.jpg",
+    tags: ["Audio", "Web Audio API", "Visualization"],
+    date: "2024-01-05"
+  }
+];
+---
+
+<MainLayout content={{ title: "Portfolio" }}>
+  <div class="min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold mb-4">Portfolio</h1>
+        <p class="text-xl text-muted-foreground">
+          A collection of my projects and experiments
+        </p>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {portfolioPieces.map((piece) => (
+          <article class="group">
+            <a 
+              href={`/portfolio/${piece.slug}`}
+              class="block bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div class="aspect-video bg-muted relative overflow-hidden">
+                <!-- Fallback if image doesn't exist -->
+                <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <span class="text-white font-semibold text-lg">{piece.title}</span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h2 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                  {piece.title}
+                </h2>
+                <p class="text-muted-foreground mb-4 line-clamp-2">
+                  {piece.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-3">
+                  {piece.tags.map((tag) => (
+                    <span class="px-2 py-1 bg-muted text-xs rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <time class="text-sm text-muted-foreground">
+                  {new Date(piece.date).toLocaleDateString()}
+                </time>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</MainLayout>
