@@ -1,15 +1,15 @@
 ---
-title: "Tom O'Neill"
+title: "Thomas O'Neill"
 layout: ../layouts/resume.astro
 ---
 
-# Tom O'Neill
+# Thomas O'Neill
 
 <!-- **Software Engineer**
 London, UK | tom@oneilltom.com
 GitHub: github.com/pipefold | Website: oneilltom.com -->
 
-## Professional Summary
+<!-- ## Professional Summary -->
 
 Software engineer specializing in web development, with expertise in 3D technologies using Three.js and the React ecosystem (including Next.js and TypeScript). Built and deployed projects from prototype to production, with a foundation in backend systems, DevOps, and functional programming. Self-taught polyglot programmer skilled in languages like Python and Rust, with interests in p2p technologies, cryptography, Bitcoin, and innovative systems.
 

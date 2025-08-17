@@ -46,18 +46,6 @@
   --font-mono: var(--font-inconsolata), ui-monospace, Menlo, monospace;
 }
 
-/* Debug: Check if font variables are being set */
-.debug-fonts {
-  font-family: var(--font-montserrat), fallback;
-}
-.debug-fonts::before {
-  content: "Montserrat var: " var(--font-montserrat, "NOT SET");
-  display: block;
-  font-family: monospace;
-  font-size: 12px;
-  color: red;
-}
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -209,18 +197,27 @@
 }
 
 .resume-prose {
-  @apply max-w-[65ch] text-foreground text-xs;
+  @apply max-w-[65ch] text-foreground text-sm;
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    @apply font-serif;
+  }
 
   & h1:not(.not-prose h1) {
-    @apply scroll-m-20 text-4xl font-normal tracking-tight;
+    @apply scroll-m-20 text-5xl font-normal tracking-[0.005em];
   }
 
   & h2:not(.not-prose h2) {
-    @apply scroll-m-20 border-b pb-2 text-2xl font-normal tracking-tight mt-12 first:mt-0;
+    @apply scroll-m-20 border-b pb-2 text-4xl font-normal tracking-[0.015em] mt-12 first:mt-0;
   }
 
   & h3:not(.not-prose h3) {
-    @apply scroll-m-20 text-xl font-semibold mt-12 tracking-tight first:mt-0;
+    @apply scroll-m-20 text-2xl font-medium mt-12 tracking-normal first:mt-0;
   }
 
   & h4:not(.not-prose h4) {
