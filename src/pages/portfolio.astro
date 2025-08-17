@@ -33,14 +33,14 @@ const portfolioPieces = [
 <MainLayout content={{ title: "Portfolio" }}>
   <div class="min-h-screen p-8">
     <div class="max-w-6xl mx-auto">
-      <header class="mb-12">
+      <header class="mb-12 prose">
         <h1 class="text-4xl font-bold mb-4">Portfolio</h1>
         <p class="text-xl text-muted-foreground">
           A collection of my projects and experiments
         </p>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 not-prose">
         {portfolioPieces.map((piece) => (
           <article class="group">
             <a 

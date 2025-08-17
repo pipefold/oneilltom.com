@@ -14,8 +14,8 @@ Software engineer specializing in web development, with expertise in 3D technolo
 Open Systems Lab, Remote/UK  
 November 2021 – March 2025
 
-- Led development of [BuildX](https://github.com/pipefold/buildx-app/blob/main/README.md) prototype: 3D web app for modular housing design (WikiHouse integration); real-time parametric modeling, interactive 3D manipulations (oriented bounding box collision, three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), analytics for carbon/cost estimates, outputs (bill of materials, CSV/3D exports).
-- Directed frontend redevelopment of [Atlas of Ownership](https://atlasofownership.org): Mapbox GL/Next.js platform for browsing land ownership on 3D globe; synchronized routing, SSR, navigation, and interactive visualizations.
+- Led development of [<span>BuildX</span> :github:](https://github.com/pipefold/buildx-app/blob/main/README.md) prototype: 3D web app for modular housing design (WikiHouse integration); real-time parametric modeling, interactive 3D manipulations (oriented bounding box collision, three-bvh-csg), geospatial site selection (Mapbox GL, Turf.js), analytics for carbon/cost estimates, outputs (bill of materials, CSV/3D exports).
+- Directed frontend redevelopment of [<span>Atlas of Ownership</span> :globe_with_meridians:](https://atlasofownership.org): Mapbox GL/Next.js platform for browsing land ownership on 3D globe; synchronized routing, SSR, navigation, and interactive visualizations.
 
 ### Co-Founder & Lead Developer
 

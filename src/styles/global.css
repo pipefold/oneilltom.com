@@ -196,7 +196,7 @@
   }
 }
 
-.resume-prose {
+.prose {
   @apply max-w-[65ch] text-foreground text-sm;
 
   & h1,
@@ -252,9 +252,22 @@
   }
 
   & a:not(.not-prose a) {
-    @apply font-medium text-primary underline underline-offset-4;
+    @apply font-medium text-primary;
+    text-decoration: none; /* Remove default underline from the entire link */
+    color: inherit; /* Optional: Preserve your site's link color scheme */
   }
 
+  & a:hover:not(.not-prose a:hover) {
+    text-decoration: none;
+  }
+
+  & a span:not(.not-prose a span) {
+    @apply underline underline-offset-4;
+  }
+
+  & a:hover span:not(.not-prose a:hover span) {
+    @apply underline underline-offset-4;
+  }
   & blockquote:not(.not-prose blockquote) {
     @apply mt-6 border-l-2 pl-6 italic;
   }
